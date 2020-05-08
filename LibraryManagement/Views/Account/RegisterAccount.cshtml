@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="RegisterAccount">
+        <form id="AccountRegisterFrom" asp-action="RegisterAccount" onsubmit="return validationFunction(Event)">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -25,13 +25,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Nidno" class="control-label"></label>
-                <input asp-for="Nidno" class="form-control" />
+                <input asp-for="Nidno" class="form-control" id="niodno" />
                 <span asp-validation-for="Nidno" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PassportNo" class="control-label"></label>
-                <input asp-for="PassportNo" class="form-control" />
-                <span asp-validation-for="PassportNo" class="text-danger"></span>
+                <input asp-for="PassportNo" class="form-control" id="PassportNo" />
+                <span id="PassportValidation" asp-validation-for="PassportNo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -79,12 +79,30 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" id="RegisterAccountButton"  />
             </div>
         </form>
-        </div>
     </div>
-        
-        @section Scripts {
-            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript">
+        function validationFunction (e) {
+            var Nidno = $('#niodno');
+            var PassportNo = $('#PassportNo');
+            if (Nidno.val() == null || Nidno.val() == '') {
+               
+                if (PassportNo.val() == null || PassportNo.val() == '') {
+                    alert("You must provide either valid Nid number or Passport number for Registration");
+                    return false;
+                }
+            }
+
+            return true;
         }
+    </script>
+}
+
