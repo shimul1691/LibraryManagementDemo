@@ -145,11 +145,11 @@ namespace LibraryManagement.Models
                 entity.HasKey(e => e.UserId)
                     .HasName("PK__LibraryU__1788CC4CAAE28753");
 
-                entity.Property(e => e.AccountStatus)
-                    .IsRequired()
-                    .HasMaxLength(100);
+                entity.Property(e => e.AccountStatus).HasMaxLength(100);
 
                 entity.Property(e => e.ActiveOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ApplicationId).HasColumnName("applicationID");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -247,6 +247,8 @@ namespace LibraryManagement.Models
                 entity.Property(e => e.Upassword)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.UserRequestStatus).HasMaxLength(30);
             });
 
             modelBuilder.Entity<Publisher>(entity =>
@@ -271,6 +273,8 @@ namespace LibraryManagement.Models
             modelBuilder.Entity<Request>(entity =>
             {
                 entity.Property(e => e.BookId).HasColumnName("BookID");
+
+                entity.Property(e => e.RequestToken).HasMaxLength(100);
 
                 entity.Property(e => e.Rstatus)
                     .IsRequired()

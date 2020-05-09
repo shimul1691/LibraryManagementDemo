@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LibraryManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,11 @@ namespace LibraryManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddSession(so =>
+            {
+                so.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
             services.AddControllersWithViews();
             services.AddDbContext<LibraryManagementContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevEnvironmentConnectionString")));
@@ -45,6 +51,9 @@ namespace LibraryManagement
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseRouting();
 

@@ -6,7 +6,6 @@ namespace LibraryManagement.Models
     public partial class LibraryUserRegistrationRequest
     {
         public int RequestId { get; set; }
-        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Nidno { get; set; }
@@ -21,5 +20,6 @@ namespace LibraryManagement.Models
         public string DateOfBirth { get; set; }
         public string ActivationCode { get; set; }
         public DateTime RequestTime { get; set; }
+        public string UserRequestStatus { get; set; }
     }
 }

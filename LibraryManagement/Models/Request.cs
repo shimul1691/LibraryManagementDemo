@@ -10,6 +10,7 @@ namespace LibraryManagement.Models
         public int UserId { get; set; }
         public string Rstatus { get; set; }
         public int? ApprovedBy { get; set; }
+        public string RequestToken { get; set; }
 
         public virtual Administrator ApprovedByNavigation { get; set; }
         public virtual Book Book { get; set; }
