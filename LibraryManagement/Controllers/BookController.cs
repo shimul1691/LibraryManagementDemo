@@ -24,8 +24,6 @@ namespace LibraryManagement.Controllers
         {
             var libraryManagementContext = _context.Book.Include(b => b.Auth).Include(b => b.Pub);
 
-            // return View(await _context.Book.ToListAsync());
-
             return View(await libraryManagementContext.ToListAsync());
         }
 
@@ -60,7 +58,5 @@ namespace LibraryManagement.Controllers
                 return View();
             }
         }
-
-
     }
 }
